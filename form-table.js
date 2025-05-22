@@ -13,48 +13,74 @@ Coding Steps:
 // STATE VARIABLES
 let playersList = [];
 const URL = "http://localhost:3000/playersRoster"
+let table = document.getElementById("roster");
 
-let playerName = document.getElementById("name");
-let playerPosition = document.getElementById("position");
-let playerPhone = document.getElementById("phone");
 
-async function getPlayers() {
+async function renderPlayers() {
       // ADD NEW PLAYER TO THE JSON-SERVER dB
         let response = await fetch(URL)
         let data = await response.json()
         console.log(data);
-        // playerName.innerHTML = data.map(
-        //   player => `${data.fullname}`
-        // )
+        console.log(data.length);
+        for (let i = 0; i < data.length; i++) {
+          // create a new table row for each player
+          let row = document.createElement("tr")
+          
+          //create new cell elements in each row
+          let name = document.createElement("td")
+          let position = document.createElement("td")
+          let phone = document.createElement("td")
+
+          // assign the player data to the new elements
+          name.innerText = data[i].fullName;
+          position.innerText = data[i].position;
+          phone.innerText = data[i].phone;
+
+          // Append the new cells to the new row (give them Earth Passes)
+          row.appendChild(name);
+          row.appendChild(position);
+          row.appendChild(phone);
+              
+          // Append the new row to table body 
+          table.appendChild(row)
+        }
+
 }
-getPlayers();
+renderPlayers();
 
+// // From Wk 10 Assignment, for reference.
 // function addPlayer () {
+//   // Get the table element in which to add my row
+//   let table = document.getElementById("roster");
 
-//     /
-        
-//     // Get the new Player data from the form
-//     let playerName = document.getElementById("name");
-//     let playerPosition = document.getElementById("position");
-//     let playerPhone = document.getElementById("phone");
+//   // Create a new row element in the table
+//   let row = document.createElement("tr")
+      
+//   // Create new cell elements in the row
+//   let name = document.createElement("td")
+//   let position = document.createElement("td")
+//   let phone = document.createElement("td")
+      
+//   // Get the new Player data from the form
+//   let playerName = document.getElementById("name");
+//   let playerPosition = document.getElementById("position");
+//   let playerPhone = document.getElementById("phone");
+  
+//   // Insert the new player data into cells
+//   name.innerText = playerName.value;
+//   position.innerText = playerPosition.value;
+//   phone.innerText = playerPhone.value;
 
-//     // Insert the new player data into cells
-//     name.innerText = playerName.value;
-//     position.innerText = playerPosition.value;
-//     phone.innerText = playerPhone.value;
+//   // Append cells to row (give them Earth Passes)
+//   row.appendChild(name);
+//   row.appendChild(position);
+//   row.appendChild(phone);
+      
+//   // Append row to table body
+//   table.appendChild(row)
 
-//     // Append cells to row (give them Earth Passes)
-//     row.appendChild(name);
-//     row.appendChild(position);
-//     row.appendChild(phone);
-        
-//     // Append row to table body
-//     table.appendChild(row)
-
-//     // REMOVE PLAYER FROM THE JSON dB
-    
-//     // remove a player from the front end
-//     row.addEventListener("click", () => {
-//         row.remove()
-//     });
+//   // remove a player
+//   row.addEventListener("click", () => {
+//       row.remove()
+//   });
 // }
