@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12 Assignment</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css"></link>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+    <div class="container-fluid"> <!-- CoRoCoCo -->
+        <div class="row justify-content-md-center">
+            <div class="col-10">
+                <h1>Week 12 Coding Assignment</h1>
+                <h2>Repurposed from Week 10 Coding Assignment</h2>
+                <p>Adding a json file for the db API.</p>
+                <!-- Form Row -->
+                <br>
+                <h2>Add A New Player to the Subs List</h2>
+                <form class="text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                    <div class="mb-3 row align-items-center ">
+                        <div class="col-auto">
+                            <label for="name" class="form-label">Your Name</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control"
+                            id="name"
+                            aria-label="First Last" autocomplete="name">
+                            <div id="name" class="form-text fst-italic">
+                                <span class="badge text-bg-primary">
+                                    Please include your first and last name.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+            
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="position" class="form-label">Position</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control"
+                            id="position"
+                            aria-label="hockey position">
+                            <div id="position" class="form-text fst-italic">
+                                <span class="badge text-bg-primary">
+                                    List all positions you play, separated by commas.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+            
+                    <!--I added html to validate the phone number input. I used the code from the first week and added it to the input element.-->
+                      <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                          <label for="name" class="col-form-label">Your Phone Number</label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-control" 
+                            type="text" 
+                            id="phone" 
+                            aria-label="(area) phone number"
+                            autocomplete="phone"
+                            type="tel"
+                            name="phone"
+                            placeholder="XXX-XXX-XXXX"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            required/>
+                        </div>
+                    </div>
+                    
+                    <!--Used "return false" so the page wouldn't erase the newly added players-->
+                    <button type="submit" class="btn btn-dark" onclick="addPlayer(); return false">Add</button>
+                </form>
+
+                <!-- Table Row -->
+                <br>
+                <h2>Available Hockey Players</h2>
+                <p>Click on a player to remove from this list.</p>
+                <table class="table table-striped" id="roster">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Phone</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                     <!--Rows to be added here-->
+                    </tbody>
+                  </table>
+            </div>
+    </div>
+    <script src="form-table.js"></script>
+</body>
+</html>

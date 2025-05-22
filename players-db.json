@@ -1,0 +1,16 @@
+{
+    "playersRoster": [
+    {
+      "id": 1,
+      "fullName": "Mike Westphal",
+      "position": "Defense",
+      "phone": "505-123-4567"
+    },
+    {
+      "id": 2,
+      "fullName": "Seth Billie",
+      "position": "Goalie",
+      "phone": "505-123-4568"
+    }
+  ]
+}
