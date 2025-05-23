@@ -4,83 +4,106 @@ Coding Steps:
 + Create a CRD application (Create-Read-Update-Delete without update) using json-server or another API
 + Use fetch and async/await to interact with the API
 + Use a form to create/post new entities -- I've already created one, so I'm reusing it.
-+ Build a way for users to delete entities -- I've created a way to delete from the front end. I'll reuse that function and add the backend component
++ Build a way for users to delete entities
 + Include a way to get entities from the API and display them -- I'm going to use a json-server
 + You do NOT need update, but you can add it if you'd like
-+ Use Bootstrap and/or CSS to style your project -- I'm pulling it from the Week 10 assignment. I might update it if I feel like it. ;)
++ Use Bootstrap and/or CSS to style your project -- I'm pulling my form from the Week 10 assignment. It's already styled from that assignment.
 */
 
 // STATE VARIABLES
-let playersList = [];
-const URL = "http://localhost:3000/playersRoster"
+const URL = "http://localhost:3000/playersRoster/"
 let table = document.getElementById("roster");
 
-
+// EVENT LISTENERS
+// Show Players Button
 async function renderPlayers() {
-      // ADD NEW PLAYER TO THE JSON-SERVER dB
-        let response = await fetch(URL)
-        let data = await response.json()
-        console.log(data);
-        console.log(data.length);
-        for (let i = 0; i < data.length; i++) {
-          // create a new table row for each player
-          let row = document.createElement("tr")
-          
-          //create new cell elements in each row
-          let name = document.createElement("td")
-          let position = document.createElement("td")
-          let phone = document.createElement("td")
+  // get the info from the players dB
+  let response = await fetch(URL)
+  let data = await response.json()
 
-          // assign the player data to the new elements
-          name.innerText = data[i].fullName;
-          position.innerText = data[i].position;
-          phone.innerText = data[i].phone;
+  // create Table headings
+  let headerRow = document.createElement("tr")
+  let headerID = document.createElement("td")
+  let headerName = document.createElement("td")
+  let headerPosition = document.createElement("td")
+  let headerPhone = document.createElement("td")
 
-          // Append the new cells to the new row (give them Earth Passes)
-          row.appendChild(name);
-          row.appendChild(position);
-          row.appendChild(phone);
-              
-          // Append the new row to table body 
-          table.appendChild(row)
-        }
+  // set text for table headings
+  headerID.innerText = "ID"
+  headerName.innerText = "Full Name"
+  headerPosition.innerText = "Position"
+  headerPhone.innerText = "Phone"
 
+  // header row styling
+  // I can't seem to figure out how to refresh just the table, so I'm going to add styling to see where the header row is. It's not a perfect solution, but it'll help the user for now.
+  headerRow.style.backgroundColor = "grey"
+  headerRow.style.color = "white"
+
+  // append the table headings to a new row
+  headerRow.appendChild(headerID);
+  headerRow.appendChild(headerName);
+  headerRow.appendChild(headerPosition);
+  headerRow.appendChild(headerPhone);
+
+  // Append the new row to table body 
+  table.appendChild(headerRow)
+
+  // create a new row for each player
+  for (let i = 0; i < data.length; i++) {
+    // create a new table row for each player
+    let row = document.createElement("tr")
+    
+    //create new cell elements in each row
+    let listNo = document.createElement("td")
+    let name = document.createElement("td")
+    let position = document.createElement("td")
+    let phone = document.createElement("td")
+
+    // assign the player data to the new elements
+    listNo.innerText = data[i].id;
+    name.innerText = data[i].fullName;
+    position.innerText = data[i].position;
+    phone.innerText = data[i].phone;
+
+    // Append the new cells to the new row (give them Earth Passes)
+    row.appendChild(listNo);
+    row.appendChild(name);
+    row.appendChild(position);
+    row.appendChild(phone);
+        
+    // Append the new row to table body 
+    table.appendChild(row)
+  }
 }
-renderPlayers();
 
-// // From Wk 10 Assignment, for reference.
-// function addPlayer () {
-//   // Get the table element in which to add my row
-//   let table = document.getElementById("roster");
+// Add New Player Button
+async function addPlayer() {
+  //Get the new Player data from the form
+  let playerName = document.getElementById("name");
+  let playerPosition = document.getElementById("position");
+  let playerPhone = document.getElementById("phone");
 
-//   // Create a new row element in the table
-//   let row = document.createElement("tr")
-      
-//   // Create new cell elements in the row
-//   let name = document.createElement("td")
-//   let position = document.createElement("td")
-//   let phone = document.createElement("td")
-      
-//   // Get the new Player data from the form
-//   let playerName = document.getElementById("name");
-//   let playerPosition = document.getElementById("position");
-//   let playerPhone = document.getElementById("phone");
+  //Create new player
+  let newPlayer = {
+    fullName: playerName.value,
+    position: playerPosition.value,
+    phone: playerPhone.value
+  }
   
-//   // Insert the new player data into cells
-//   name.innerText = playerName.value;
-//   position.innerText = playerPosition.value;
-//   phone.innerText = playerPhone.value;
+  // POST the new player to the players database
+  await fetch(URL, {
+    method: "POST", // create request. Can also be GET, PUT, DELETE
+    // headers and body are needed only if sending data in request
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newPlayer) // must match "Content-Type"
+  })
+}
 
-//   // Append cells to row (give them Earth Passes)
-//   row.appendChild(name);
-//   row.appendChild(position);
-//   row.appendChild(phone);
-      
-//   // Append row to table body
-//   table.appendChild(row)
+// Remove a Player Button
+function removePlayer(){
+  let indexToDelete = prompt("Which player would you like to delete from this list?\n Enter the player's ID number: ")
 
-//   // remove a player
-//   row.addEventListener("click", () => {
-//       row.remove()
-//   });
-// }
+  fetch(URL + indexToDelete, {
+    method: "DELETE", // delete request
+  })
+}

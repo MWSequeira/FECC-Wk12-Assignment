@@ -1,5 +1,5 @@
 {
-    "playersRoster": [
+  "playersRoster": [
     {
       "id": 1,
       "fullName": "Mike Westphal",
@@ -11,6 +11,24 @@
       "fullName": "Seth Billie",
       "position": "Goalie",
       "phone": "505-123-4568"
+    },
+    {
+      "fullName": "Donald \"Woogie\" Gadomski",
+      "position": "Goalie",
+      "phone": "505-987-6541",
+      "id": 6
+    },
+    {
+      "fullName": "Brent Kvern",
+      "position": "Defense",
+      "phone": "505-654-3219",
+      "id": 7
+    },
+    {
+      "fullName": "Billy M. F. Cottle",
+      "position": "Forward",
+      "phone": "505-123-4569",
+      "id": 8
     }
   ]
 }

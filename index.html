@@ -13,8 +13,8 @@
         <div class="row justify-content-md-center">
             <div class="col-10">
                 <h1>Week 12 Coding Assignment</h1>
-                <h2>Repurposed from Week 10 Coding Assignment</h2>
-                <p>Adding a json file for the db API.</p>
+                <p><i>This form is repurposed from the Week 10 Coding Assignment</i></p>
+                <p><i>I'm adding a json file for the players database API.</i></p>
                 <!-- Form Row -->
                 <br>
                 <h2>Add A New Player to the Subs List</h2>
@@ -73,22 +73,20 @@
                     </div>
                     
                     <!--Used "return false" so the page wouldn't erase the newly added players-->
-                    <button type="submit" class="btn btn-dark" onclick="addPlayer(); return false">Add</button>
+                    <button type="submit" class="btn btn-success m-3" onclick="addPlayer(); return false">Add New Player</button>
                 </form>
 
                 <!-- Table Row -->
                 <br>
                 <h2>Available Hockey Players</h2>
-                <p>Click on a player to remove from this list.</p>
+
+                <button type="submit" class="btn btn-secondary m-3" onclick="renderPlayers()">Show Players</button>
+                
+                <button type="submit" class="btn btn-danger m-3" onclick="removePlayer()">Remove a Player</button>
+
                 <table class="table table-striped" id="roster">
-                    <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Phone</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
+                    <table id="roster">
+                    <tbody>
                      <!--Rows to be added here-->
                     </tbody>
                   </table>
