@@ -29,6 +29,12 @@
       "position": "Forward",
       "phone": "505-123-4569",
       "id": 8
+    },
+    {
+      "fullName": "Ron Neuser",
+      "position": "Goalie",
+      "phone": "505-669-1234",
+      "id": 9
     }
   ]
 }

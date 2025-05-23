@@ -11,17 +11,22 @@ Coding Steps:
 */
 
 // STATE VARIABLES
-const URL = "http://localhost:3000/playersRoster/"
-let table = document.getElementById("roster");
+const URL = "http://localhost:3000/playersRoster/" // this is the json file
+let table = document.getElementById("roster"); // get the table from the HTML
 
 // EVENT LISTENERS
 // Show Players Button
 async function renderPlayers() {
-  // get the info from the players dB
+  // get the info from the players dB. Wait for the data. Don't do anything until we have it.
   let response = await fetch(URL)
   let data = await response.json()
 
-  // create Table headings
+  // delete all existing table rows. This while loop  elininates all the rows from the top down, so we'll have to create a new header row each time.
+  while (table.rows.length > 0) {
+    table.deleteRow(0);
+  }
+
+  // create new table headings
   let headerRow = document.createElement("tr")
   let headerID = document.createElement("td")
   let headerName = document.createElement("td")
@@ -35,7 +40,6 @@ async function renderPlayers() {
   headerPhone.innerText = "Phone"
 
   // header row styling
-  // I can't seem to figure out how to refresh just the table, so I'm going to add styling to see where the header row is. It's not a perfect solution, but it'll help the user for now.
   headerRow.style.backgroundColor = "grey"
   headerRow.style.color = "white"
 
